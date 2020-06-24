@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Simplify:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Simplify_jar</output-path>
+    <root id="archive" name="Simplify.jar">
+      <element id="module-output" name="Simplify" />
+    </root>
+  </artifact>
+</component>
