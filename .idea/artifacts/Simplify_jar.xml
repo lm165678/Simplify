@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Simplify_jar</output-path>
     <root id="archive" name="Simplify.jar">
       <element id="module-output" name="Simplify" />
+      <element id="dir-copy" path="$PROJECT_DIR$/Simplify/src/jni/native" />
     </root>
   </artifact>
 </component>

@@ -1,3 +1,5 @@
+package java;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,16 +42,47 @@ public class Test {
         }
         return rf;
     }
+    public final static void writePos(String filename, List<Float> pos) throws IOException {
+        File file = new File(filename);
+        FileOutputStream fis = new FileOutputStream(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fis));
+        StringBuilder sb = new StringBuilder();
+        for(Float f : pos){
+            sb.append(f + ",");
+        }
+        String line = sb.toString();
+        line = line.substring(0, line.length() - 1);
+        bufferedWriter.write(line);
+        bufferedWriter.flush();
+        bufferedWriter.close();
+        bufferedWriter = null;
+    }
+    public final static void writeInd(String filename, List<Integer> ind) throws IOException {
+        File file = new File(filename);
+        FileOutputStream fis = new FileOutputStream(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fis));
+        StringBuilder sb = new StringBuilder();
+        for(Integer f : ind){
+            sb.append(f + ",");
+        }
+        String line = sb.toString();
+        line = line.substring(0, line.length() - 1);
+        bufferedWriter.write(line);
+        bufferedWriter.flush();
+        bufferedWriter.close();
+        bufferedWriter = null;
+    }
     public final static void main(String[] args) throws IOException {
-        float[] positions = getPositions("D:\\JhonKkk\\MyWork\\Java\\QSLim\\Simplify\\src\\positions.txt");
-        int[] indices = getIndices("D:\\JhonKkk\\MyWork\\Java\\QSLim\\Simplify\\src\\indices.txt");
+        float[] positions = getPositions("D:\\JhonKkk\\Other\\current\\posFile.txt");
+        int[] indices = getIndices("D:\\JhonKkk\\Other\\current\\indFile.txt");
 //        System.out.println("positions:"+ Arrays.toString(positions));
-        System.out.println("顶点数量:" + positions.length);
+        System.out.println("顶点数量:" + positions.length / 3);
         System.out.println("索引数量:" + indices.length);
-        int srcCount = positions.length / 3;
-        float s = .3f;
+        int srcCount = indices.length / 3;
+        float s = .9f;
         int tarCount = (int) (srcCount * s);
-        System.out.println("原生顶点数量:" + srcCount);
+        System.out.println("原生Tri数量:" + srcCount);
+        System.out.println("目标Tri数量:" + tarCount);
         System.out.println("优化比例:" + s);
         List<Float> fp = new ArrayList<Float>();
         for(float d : positions){
@@ -61,9 +94,11 @@ public class Test {
         }
         List<List> r = Tools.simplify(it, fp, tarCount);
         System.out.println("结果:" + r.size());
-        System.out.println("索引数量:" + r.get(0).size());
-        System.out.println("顶点数量:" + r.get(1).size());
-        System.out.println("indices:" + r.get(0));
-        System.out.println("positions:" + r.get(1));
+        System.out.println("Tri数量:" + r.get(0).size() / 3);
+//        System.out.println("顶点数量:" + r.get(1).size() / 3);
+        writePos("D:\\JhonKkk\\Other\\current\\sqPosFile.txt", r.get(1));
+        writeInd("D:\\JhonKkk\\Other\\current\\sqIndFile.txt", r.get(0));
+//        System.out.println("indices:" + r.get(0));
+//        System.out.println("positions:" + r.get(1));
     }
 }

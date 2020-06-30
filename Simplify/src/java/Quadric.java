@@ -1,3 +1,5 @@
+package java;
+
 public class Quadric {
     public static Quadric fromPoints(Vector3f p1, Vector3f p2, Vector3f p3){
         Vector3f p1p3 = p2.subtract(p1);

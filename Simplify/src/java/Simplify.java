@@ -1,3 +1,5 @@
+package java;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +71,7 @@ public class Simplify {
         boolean recompute = options.m_recompute;
         int deleted_triangles = 0;
         int triangle_count = m_triangles.length;
+        System.out.println("triangle_count:" + triangle_count + ",target_count:" + target_count);
         Vector3f p = new Vector3f();
         int i = 0, j = 0;
         Map<Integer, Boolean> deleted0 = new HashMap<>();
@@ -96,6 +99,7 @@ public class Simplify {
                 for(j = 0;j < 3;j++){
                     if(t.m_err[j] >= threshold)
                         continue;
+//                    System.out.println("进入2!!!!");
                     int i0 = t.m_indicse[j];
                     int i1 = t.m_indicse[(j + 1) % 3];
                     Vertex v0 = m_vertices[i0];
@@ -103,14 +107,17 @@ public class Simplify {
                     //边界检查
                     if(v0.m_border || v1.m_border)
                         continue;
+//                    System.out.println("进入3!!!!");
                     deleted0.clear();
                     deleted1.clear();
                     calculate_error(v0, v1, p);
                     //翻转时不移除
                     if(flipped(p, i0, i1, v0, v1, deleted0)){
+//                        System.out.println("翻转跳过1");
                         continue;
                     }
                     if(flipped(p, i1, i0, v1, v0, deleted1)){
+//                        System.out.println("翻转跳过2");
                         continue;
                     }
 
@@ -132,6 +139,7 @@ public class Simplify {
                 }
             }
         }
+        System.out.println("deleted_triangles:" + deleted_triangles);
         return compact_mesh();
     }
     public final boolean flipped(Vector3f p, int i0, int i1, Vertex v0, Vertex v1, Map<Integer, Boolean> deleted){
@@ -195,6 +203,7 @@ public class Simplify {
             t.m_err[3] = Math.min(t.m_err[0], Math.min(t.m_err[1], t.m_err[2]));
             m_refs.add(r);
         }
+//        System.out.println("删除....");
         return deleted_triangles;
     }
     public final void update_mesh(int iteration, boolean recompute){
