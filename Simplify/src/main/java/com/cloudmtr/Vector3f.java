@@ -1,4 +1,4 @@
-package java;
+package com.cloudmtr;
 
 import java.util.logging.Logger;
 
@@ -39,7 +39,7 @@ public class Vector3f {
     public float z;
 
     /**
-     * Constructor instantiates a new <code>java.Vector3f</code> with default
+     * Constructor instantiates a new <code>cloudmtr.Vector3f</code> with default
      * values of (0,0,0).
      *
      */
@@ -48,7 +48,7 @@ public class Vector3f {
     }
 
     /**
-     * Constructor instantiates a new <code>java.Vector3f</code> with provides
+     * Constructor instantiates a new <code>cloudmtr.Vector3f</code> with provides
      * values.
      *
      * @param x
@@ -65,9 +65,9 @@ public class Vector3f {
     }
 
     /**
-     * Constructor instantiates a new <code>java.Vector3f</code> that is a copy
+     * Constructor instantiates a new <code>cloudmtr.Vector3f</code> that is a copy
      * of the provided vector
-     * @param copy The java.Vector3f to copy
+     * @param copy The cloudmtr.Vector3f to copy
      */
     public Vector3f(Vector3f copy) {
         this.set(copy);
@@ -203,7 +203,7 @@ public class Vector3f {
     /**
      *
      * <code>scaleAdd</code> multiplies this vector by a scalar then adds the
-     * given java.Vector3f.
+     * given cloudmtr.Vector3f.
      *
      * @param scalar
      *            the value to multiply this vector by.
@@ -352,7 +352,7 @@ public class Vector3f {
      * vector
      *
      * @param other The vector to project this vector onto
-     * @return This java.Vector3f, set to the projection result
+     * @return This cloudmtr.Vector3f, set to the projection result
      */
     public Vector3f projectLocal(Vector3f other){
         float n = this.dot(other); // A . B
@@ -885,10 +885,10 @@ public class Vector3f {
     }
 
     /**
-     * Saves this java.Vector3f into the given float[] object.
+     * Saves this cloudmtr.Vector3f into the given float[] object.
      *
      * @param floats
-     *            The float[] to take this java.Vector3f. If null, a new float[3] is
+     *            The float[] to take this cloudmtr.Vector3f. If null, a new float[3] is
      *            created.
      * @return The array, with X, Y, Z float values in that order
      */
@@ -940,7 +940,7 @@ public class Vector3f {
      * <code>toString</code> returns the string representation of this vector.
      * The format is:
      *
-     * org.jme.math.java.Vector3f [X=XX.XXXX, Y=YY.YYYY, Z=ZZ.ZZZZ]
+     * org.jme.math.cloudmtr.Vector3f [X=XX.XXXX, Y=YY.YYYY, Z=ZZ.ZZZZ]
      *
      * @return the string representation of this vector.
      */

@@ -1,4 +1,4 @@
-package java;
+package com.cloudmtr;
 
 import java.util.Random;
 
@@ -228,7 +228,7 @@ public class FastMath {
      * @param p1 control point 1
      * @param p2 control point 2
      * @param p3 control point 3
-     * @param store a java.Vector3f to store the result
+     * @param store a cloudmtr.Vector3f to store the result
      * @return Catmull鈥揜om interpolation
      */
     public static Vector3f interpolateCatmullRom(float u, float T, Vector3f p0, Vector3f p1, Vector3f p2, Vector3f p3, Vector3f store) {
@@ -300,7 +300,7 @@ public class FastMath {
      * @param p1 control point 1
      * @param p2 control point 2
      * @param p3 control point 3
-     * @param store a java.Vector3f to store the result
+     * @param store a cloudmtr.Vector3f to store the result
      * @return Bezier interpolation
      */
     public static Vector3f interpolateBezier(float u, Vector3f p0, Vector3f p1, Vector3f p2, Vector3f p3, Vector3f store) {

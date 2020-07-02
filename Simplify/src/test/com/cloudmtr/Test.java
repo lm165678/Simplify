@@ -1,8 +1,10 @@
-package java;
+package com.cloudmtr;
+
+import jni.CqsMesh;
+import jni.Cqslim;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Test {
@@ -72,9 +74,10 @@ public class Test {
         bufferedWriter.close();
         bufferedWriter = null;
     }
-    public final static void main(String[] args) throws IOException {
-        float[] positions = getPositions("D:\\JhonKkk\\Other\\current\\posFile.txt");
-        int[] indices = getIndices("D:\\JhonKkk\\Other\\current\\indFile.txt");
+    public final static void main(String[] args) throws Exception {
+        String path = Test.class.getResource("").getPath().replace("com/cloudmtr","resouces");
+        float[] positions = getPositions(path+"\\positions.txt");
+        int[] indices = getIndices(path+"\\indices.txt");
 //        System.out.println("positions:"+ Arrays.toString(positions));
         System.out.println("顶点数量:" + positions.length / 3);
         System.out.println("索引数量:" + indices.length);
@@ -93,12 +96,16 @@ public class Test {
             it.add(i);
         }
         List<List> r = Tools.simplify(it, fp, tarCount);
+        CqsMesh te = Cqslim.qslimRun(positions,indices, .3f);
         System.out.println("结果:" + r.size());
         System.out.println("Tri数量:" + r.get(0).size() / 3);
 //        System.out.println("顶点数量:" + r.get(1).size() / 3);
-        writePos("D:\\JhonKkk\\Other\\current\\sqPosFile.txt", r.get(1));
-        writeInd("D:\\JhonKkk\\Other\\current\\sqIndFile.txt", r.get(0));
+        writePos(path+"\\sqPosFile.txt", r.get(1));
+        writeInd(path+"\\sqIndFile.txt", r.get(0));
 //        System.out.println("indices:" + r.get(0));
 //        System.out.println("positions:" + r.get(1));
+
+        System.out.print(te.getFaces());
+        System.out.print(te.getVertices());
     }
 }

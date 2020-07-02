@@ -1,4 +1,4 @@
-package java;
+package com.cloudmtr;
 
 public class Quadric {
     public static Quadric fromPoints(Vector3f p1, Vector3f p2, Vector3f p3){
