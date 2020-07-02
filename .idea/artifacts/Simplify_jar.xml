@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Simplify:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Simplify_jar</output-path>
-    <root id="archive" name="Simplify.jar">
-      <element id="module-output" name="Simplify" />
-      <element id="dir-copy" path="$PROJECT_DIR$/Simplify/src/main/java/jni/Cqslim/native" />
-    </root>
-  </artifact>
-</component>
