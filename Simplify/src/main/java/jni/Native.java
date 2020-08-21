@@ -27,7 +27,7 @@ public class Native {
     public static void loadNativeLibrary(Class cl, String libPath, String libName) {
         String dir=cl.getResource("").getPath();
         int bits = getBits();
-        libName += "_" + bits;
+        libName += "_x" + bits;
         int os = getOS();
         if(os == S_WIN_OS){
             libName += ".dll";
