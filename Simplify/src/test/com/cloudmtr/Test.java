@@ -76,8 +76,8 @@ public class Test {
     }
     public final static void main(String[] args) throws Exception {
         String path = Test.class.getResource("").getPath().replace("com/cloudmtr","resouces");
-        float[] positions = getPositions(path+"\\positions.txt");
-        int[] indices = getIndices(path+"\\indices.txt");
+        float[] positions = getPositions("D:\\JhonKkk\\Other\\current\\sposFile2.txt");
+        int[] indices = getIndices("D:\\JhonKkk\\Other\\current\\sindFile2.txt");
 //        System.out.println("positions:"+ Arrays.toString(positions));
         System.out.println("顶点数量:" + positions.length / 3);
         System.out.println("索引数量:" + indices.length);
