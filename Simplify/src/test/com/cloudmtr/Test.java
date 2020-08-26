@@ -86,6 +86,7 @@ public class Test {
         int tarCount = (int) (srcCount * s);
         System.out.println("原生Tri数量:" + srcCount);
         System.out.println("目标Tri数量:" + tarCount);
+
         System.out.println("优化比例:" + s);
         List<Float> fp = new ArrayList<Float>();
         for(float d : positions){
@@ -104,8 +105,9 @@ public class Test {
         writeInd(path+"\\sqIndFile.txt", r.get(0));
 //        System.out.println("indices:" + r.get(0));
 //        System.out.println("positions:" + r.get(1));
-
-        System.out.print(te.getFaces());
-        System.out.print(te.getVertices());
+        if(te!=null) {
+            System.out.print(te.getFaces());
+            System.out.print(te.getVertices());
+        }
     }
 }

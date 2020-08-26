@@ -27,7 +27,7 @@ public class Native {
     public static void loadNativeLibrary(Class cl, String libPath, String libName) {
         String dir=cl.getResource("").getPath();
         int bits = getBits();
-        libName += "_" + bits;
+        libName += "_x" + bits;
         int os = getOS();
         if(os == S_WIN_OS){
             libName += ".dll";
@@ -35,11 +35,11 @@ public class Native {
         else if(os == S_LINUX_OS){
             libName += ".so";
         }
-        String s1 = dir + libPath + libName;
+      /*  String s1 = dir + libPath + libName;
         System.out.println("lib:" + s1);
         System.load(s1);
-        System.out.println("加载" + libName + "完成...");
-        /*try{
+        System.out.println("加载" + libName + "完成...");*/
+        try{
 
             String nativeTempDir = System.getProperty("java.io.tmpdir");
             String libraryPath = nativeTempDir+File.separator+libName;
@@ -47,9 +47,7 @@ public class Native {
             if(extractedLibFile.exists()){
                 extractedLibFile.delete();
             }
-            //String s1 = "E:\\workspace\\sources\\simplify\\out\\production\\Simplify\\jni\\native\\SimpleQSlim_64.dll";//dir + libPath + libName;
             InputStream in = cl.getResourceAsStream(libPath + libName);
-            //FileInputStream in = new FileInputStream(new File(s1));
             BufferedInputStream reader = new BufferedInputStream(in);
             FileOutputStream writer = new FileOutputStream(extractedLibFile);
             byte[] buffer = new byte[1024];
@@ -66,6 +64,6 @@ public class Native {
         }catch (Exception e){
 
             e.printStackTrace();
-        }*/
+        }
     }
 }
