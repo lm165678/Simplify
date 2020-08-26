@@ -1,3 +1,7 @@
 /.idea/
 /out/
 .idea/
+out/
+Simplify/simplify.xml
+Simplify/simplify.iml
+test/
