@@ -5,3 +5,5 @@ out/
 Simplify/simplify.xml
 Simplify/simplify.iml
 test/
+Simplify/out/*
+Simplify/.idea/*
