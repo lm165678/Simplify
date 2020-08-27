@@ -44,7 +44,7 @@ public class Test {
         }
         return rf;
     }
-    public final static void writePos(String filename, List<Float> pos) throws IOException {
+    public final static void writePos(String filename, float[] pos) throws IOException {
         File file = new File(filename);
         FileOutputStream fis = new FileOutputStream(file);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fis));
@@ -59,7 +59,7 @@ public class Test {
         bufferedWriter.close();
         bufferedWriter = null;
     }
-    public final static void writeInd(String filename, List<Integer> ind) throws IOException {
+    public final static void writeInd(String filename, int[] ind) throws IOException {
         File file = new File(filename);
         FileOutputStream fis = new FileOutputStream(file);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fis));
@@ -76,13 +76,13 @@ public class Test {
     }
     public final static void main(String[] args) throws Exception {
         String path = Test.class.getResource("").getPath().replace("com/cloudmtr","resouces");
-        float[] positions = getPositions("D:\\JhonKkk\\Other\\current\\sposFile2.txt");
-        int[] indices = getIndices("D:\\JhonKkk\\Other\\current\\sindFile2.txt");
+        float[] positions = getPositions("C:\\Users\\Lenovo\\Documents\\WeChat Files\\wxid_p511eou3mwmo22\\FileStorage\\File\\2020-08\\CoordinateConverDemo\\posFile.txt");
+        int[] indices = getIndices("C:\\Users\\Lenovo\\Documents\\WeChat Files\\wxid_p511eou3mwmo22\\FileStorage\\File\\2020-08\\CoordinateConverDemo\\indFile.txt");
 //        System.out.println("positions:"+ Arrays.toString(positions));
         System.out.println("顶点数量:" + positions.length / 3);
         System.out.println("索引数量:" + indices.length);
         int srcCount = indices.length / 3;
-        float s = .9f;
+        float s = .3f;
         int tarCount = (int) (srcCount * s);
         System.out.println("原生Tri数量:" + srcCount);
         System.out.println("目标Tri数量:" + tarCount);
@@ -96,18 +96,21 @@ public class Test {
         for(int i : indices){
             it.add(i);
         }
-        List<List> r = Tools.simplify(it, fp, tarCount);
+//        List<List> r = Tools.simplify(it, fp, tarCount);
         CqsMesh te = Cqslim.qslimRun(positions,indices, .3f);
-        System.out.println("结果:" + r.size());
-        System.out.println("Tri数量:" + r.get(0).size() / 3);
-//        System.out.println("顶点数量:" + r.get(1).size() / 3);
-        writePos(path+"\\sqPosFile.txt", r.get(1));
-        writeInd(path+"\\sqIndFile.txt", r.get(0));
+//        te = Cqslim.qslimRun(te.getVertices(),te.getFaces(), .3f);
+//        System.out.println("结果:" + r.size());
+//        System.out.println("Tri数量:" + r.get(0).size() / 3);
+////        System.out.println("顶点数量:" + r.get(1).size() / 3);
+//        writePos(path+"\\sqPosFile.txt", r.get(1));
+//        writeInd(path+"\\sqIndFile.txt", r.get(0));
 //        System.out.println("indices:" + r.get(0));
 //        System.out.println("positions:" + r.get(1));
         if(te!=null) {
-            System.out.print(te.getFaces());
-            System.out.print(te.getVertices());
+            writeInd("D:\\JhonKkk\\Other\\current\\sindFile2.txt", te.getFaces());
+            writePos("D:\\JhonKkk\\Other\\current\\sposFile2.txt", te.getVertices());
+//            System.out.print(te.getFaces());
+//            System.out.print(te.getVertices());
         }
     }
 }
