@@ -90,22 +90,14 @@ public class Test {
         System.out.println("目标Tri数量:" + tarCount);
 
         System.out.println("优化比例:" + s);
+        // 注释掉这一行,然后单独查看内存,会发现java层运行10次占用了4G多内存
+        // 撤销注释,运行10次,发现最终内存停留在4G多,c/c++层没有内存泄漏
         CqsMesh te = Cqslim.qslimRun(positions,indices, .3f);
-//        te = Cqslim.qslimRun(te.getVertices(),te.getFaces(), .3f);
-//        System.out.println("结果:" + r.size());
-//        System.out.println("Tri数量:" + r.get(0).size() / 3);
-////        System.out.println("顶点数量:" + r.get(1).size() / 3);
-//        writePos(path+"\\sqPosFile.txt", r.get(1));
-//        writeInd(path+"\\sqIndFile.txt", r.get(0));
-//        System.out.println("indices:" + r.get(0));
-//        System.out.println("positions:" + r.get(1));
         if(te!=null) {
             System.out.println("te.getFaces.size:" + te.getFaces().length);
             System.out.println("te.getVertices.size:" + te.getVertices().length);
 //            writeInd("D:\\JhonKkk\\Other\\current\\sindFile2.txt", te.getFaces());
 //            writePos("D:\\JhonKkk\\Other\\current\\sposFile2.txt", te.getVertices());
-//            System.out.print(te.getFaces());
-//            System.out.print(te.getVertices());
         }
         positions = null;
         indices = null;
