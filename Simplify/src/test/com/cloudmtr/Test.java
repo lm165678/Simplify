@@ -74,8 +74,10 @@ public class Test {
         bufferedWriter.close();
         bufferedWriter = null;
     }
-    public final static void main(String[] args) throws Exception {
-        String path = Test.class.getResource("").getPath().replace("com/cloudmtr","resouces");
+
+
+    public final static void testWrite() throws IOException {
+//        String path = Test.class.getResource("").getPath().replace("com/cloudmtr","resouces");
         float[] positions = getPositions("C:\\Users\\Lenovo\\Documents\\WeChat Files\\wxid_p511eou3mwmo22\\FileStorage\\File\\2020-08\\CoordinateConverDemo\\posFile.txt");
         int[] indices = getIndices("C:\\Users\\Lenovo\\Documents\\WeChat Files\\wxid_p511eou3mwmo22\\FileStorage\\File\\2020-08\\CoordinateConverDemo\\indFile.txt");
 //        System.out.println("positions:"+ Arrays.toString(positions));
@@ -88,15 +90,6 @@ public class Test {
         System.out.println("目标Tri数量:" + tarCount);
 
         System.out.println("优化比例:" + s);
-        List<Float> fp = new ArrayList<Float>();
-        for(float d : positions){
-            fp.add((float)d);
-        }
-        List<Integer> it = new ArrayList<>();
-        for(int i : indices){
-            it.add(i);
-        }
-//        List<List> r = Tools.simplify(it, fp, tarCount);
         CqsMesh te = Cqslim.qslimRun(positions,indices, .3f);
 //        te = Cqslim.qslimRun(te.getVertices(),te.getFaces(), .3f);
 //        System.out.println("结果:" + r.size());
@@ -107,10 +100,36 @@ public class Test {
 //        System.out.println("indices:" + r.get(0));
 //        System.out.println("positions:" + r.get(1));
         if(te!=null) {
-            writeInd("D:\\JhonKkk\\Other\\current\\sindFile2.txt", te.getFaces());
-            writePos("D:\\JhonKkk\\Other\\current\\sposFile2.txt", te.getVertices());
+            System.out.println("te.getFaces.size:" + te.getFaces().length);
+            System.out.println("te.getVertices.size:" + te.getVertices().length);
+//            writeInd("D:\\JhonKkk\\Other\\current\\sindFile2.txt", te.getFaces());
+//            writePos("D:\\JhonKkk\\Other\\current\\sposFile2.txt", te.getVertices());
 //            System.out.print(te.getFaces());
 //            System.out.print(te.getVertices());
+        }
+        positions = null;
+        indices = null;
+        te = null;
+    }
+
+    public final static void main(String[] args) throws Exception {
+//        System.out.println("========================================>1");
+//        testWrite();
+//        System.out.println("========================================>2");
+//        testWrite();
+        for(int i = 0;i < 10;i++){
+            int finalI = i;
+            System.out.println("========================================>" + (finalI + 1));
+            try {
+                testWrite();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("执行GC!!!!!!!!!!!!!!!!!!");
+            Runtime.getRuntime().gc();
+        }
+        while(true){
+            Thread.sleep(1000L);
         }
     }
 }
