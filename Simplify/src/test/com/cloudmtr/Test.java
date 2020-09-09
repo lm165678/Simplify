@@ -81,23 +81,25 @@ public class Test {
         float[] positions = getPositions("C:\\Users\\Lenovo\\Documents\\WeChat Files\\wxid_p511eou3mwmo22\\FileStorage\\File\\2020-08\\CoordinateConverDemo\\posFile.txt");
         int[] indices = getIndices("C:\\Users\\Lenovo\\Documents\\WeChat Files\\wxid_p511eou3mwmo22\\FileStorage\\File\\2020-08\\CoordinateConverDemo\\indFile.txt");
 //        System.out.println("positions:"+ Arrays.toString(positions));
-        System.out.println("顶点数量:" + positions.length / 3);
-        System.out.println("索引数量:" + indices.length);
+        System.out.println("vers:" + positions.length / 3);
+        System.out.println("indices:" + indices.length);
         int srcCount = indices.length / 3;
         float s = .3f;
         int tarCount = (int) (srcCount * s);
-        System.out.println("原生Tri数量:" + srcCount);
-        System.out.println("目标Tri数量:" + tarCount);
+        System.out.println("source Tris:" + srcCount);
+        System.out.println("target Tris:" + tarCount);
 
-        System.out.println("优化比例:" + s);
+        System.out.println("Cut:" + s);
         // 注释掉这一行,然后单独查看内存,会发现java层运行10次占用了4G多内存
         // 撤销注释,运行10次,发现最终内存停留在4G多,c/c++层没有内存泄漏
-        CqsMesh te = Cqslim.qslimRun(positions,indices, .3f);
+        long startTime = System.currentTimeMillis();
+        CqsMesh te = Cqslim.qslimRun(positions,indices, s);
+        System.out.println("time:" + ((System.currentTimeMillis() - startTime) / 1000L) + "ms");
         if(te!=null) {
             System.out.println("te.getFaces.size:" + te.getFaces().length);
             System.out.println("te.getVertices.size:" + te.getVertices().length);
-//            writeInd("D:\\JhonKkk\\Other\\current\\sindFile2.txt", te.getFaces());
-//            writePos("D:\\JhonKkk\\Other\\current\\sposFile2.txt", te.getVertices());
+            //writeInd("D:\\JhonKkk\\Other\\current\\sindFile2.txt", te.getFaces());
+            //writePos("D:\\JhonKkk\\Other\\current\\sposFile2.txt", te.getVertices());
         }
         positions = null;
         indices = null;
@@ -105,11 +107,7 @@ public class Test {
     }
 
     public final static void main(String[] args) throws Exception {
-//        System.out.println("========================================>1");
-//        testWrite();
-//        System.out.println("========================================>2");
-//        testWrite();
-        for(int i = 0;i < 10;i++){
+        for(int i = 0;i < 3;i++){
             int finalI = i;
             System.out.println("========================================>" + (finalI + 1));
             try {
@@ -117,11 +115,9 @@ public class Test {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("执行GC!!!!!!!!!!!!!!!!!!");
+            System.out.println("GC!!!!!!!!!!!!!!!!!!");
             Runtime.getRuntime().gc();
         }
-        while(true){
-            Thread.sleep(1000L);
-        }
+
     }
 }
